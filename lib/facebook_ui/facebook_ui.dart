@@ -1,3 +1,4 @@
+import 'package:facebook_clone/facebook_ui/widgets/widgets.dart';
 import 'package:facebook_clone/icons/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,8 +51,8 @@ class FacebookUi extends StatelessWidget {
           SizedBox(width: 14),
         ],
       ),
-      body: const Center(
-        child: Text('Facebook UI'),
+      body: ListView(
+        children: const [Avatar(size: 100, asset: 'assets/users/1.jpg')],
       ),
     );
   }
