@@ -48,11 +48,14 @@ class FacebookUi extends StatelessWidget {
             color: Color(0xff1B88E5),
             icon: CustomIcons.messenger,
           ),
-          SizedBox(width: 14),
+          SizedBox(width: 20),
         ],
       ),
       body: ListView(
-        children: const [Avatar(size: 100, asset: 'assets/users/1.jpg')],
+        padding: const EdgeInsets.all(20),
+        children: const [
+          WhatIsOnYourMind(),
+        ],
       ),
     );
   }
