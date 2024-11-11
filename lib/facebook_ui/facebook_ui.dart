@@ -55,6 +55,8 @@ class FacebookUi extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         children: const [
           WhatIsOnYourMind(),
+          SizedBox(height: 28),
+          QuickActions(),
         ],
       ),
     );
