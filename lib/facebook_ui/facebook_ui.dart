@@ -52,11 +52,12 @@ class FacebookUi extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
         children: const [
           WhatIsOnYourMind(),
           SizedBox(height: 28),
           QuickActions(),
+          SizedBox(height: 10),
+          Stories(),
         ],
       ),
     );
