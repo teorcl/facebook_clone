@@ -1,16 +1,39 @@
 import 'package:facebook_clone/facebook_ui/widgets/widgets.dart';
 import 'package:facebook_clone/icons/custom_icons_icons.dart';
+import 'package:facebook_clone/models/models.dart';
+import 'package:faker/faker.dart' hide Color;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'widgets/circle_button.dart';
 
 class FacebookUi extends StatelessWidget {
   const FacebookUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final faker = Faker();
+    final List<PublicationsModel> publications = [];
+    for (int i = 0; i < 50; i++) {
+      final random = faker.randomGenerator;
+      const reactions = Reaction.values;
+      final reactionIndex = random.integer(reactions.length - 1);
+
+      final publication = PublicationsModel(
+        user: User(
+          avatar: faker.image.loremPicsum(),
+          username: faker.person.name(),
+        ),
+        title: faker.lorem.sentence(),
+        createdAt: faker.date.dateTime(),
+        imageUrl: faker.image.loremPicsum(),
+        commentsCount: random.integer(50000),
+        sharesCount: random.integer(50000),
+        currentUserReaction: reactions[reactionIndex],
+      );
+
+      publications.add(publication);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -52,12 +75,22 @@ class FacebookUi extends StatelessWidget {
         ],
       ),
       body: ListView(
-        children: const [
-          WhatIsOnYourMind(),
-          SizedBox(height: 28),
-          QuickActions(),
-          SizedBox(height: 10),
-          Stories(),
+        children: [
+          const WhatIsOnYourMind(),
+          const SizedBox(height: 28),
+          const QuickActions(),
+          const SizedBox(height: 10),
+          const Stories(),
+          const SizedBox(height: 10),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (_, index) {
+              final publication = publications[index];
+              return PublicationItem(publication: publication);
+            },
+            itemCount: publications.length,
+          ),
         ],
       ),
     );
